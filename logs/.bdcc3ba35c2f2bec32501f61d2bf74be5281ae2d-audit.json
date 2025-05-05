@@ -1,0 +1,35 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "/home/matias/Documentos/dev/node/peliculas/backend-modular/logs/.bdcc3ba35c2f2bec32501f61d2bf74be5281ae2d-audit.json",
+    "files": [
+        {
+            "date": 1746024367187,
+            "name": "/home/matias/Documentos/dev/node/peliculas/backend-modular/logs/application-2025-04-30.log",
+            "hash": "0d3d718cb50f6573c89fd40e8236f82690fd4e8d7c4d0559c72c0149a25e925b"
+        },
+        {
+            "date": 1746117028639,
+            "name": "/home/matias/Documentos/dev/node/peliculas/backend-modular/logs/application-2025-05-01.log",
+            "hash": "30572cd2dabe7d420dd40b65d7d456c3c518735fa3644df35b94b7e0f63236c1"
+        },
+        {
+            "date": 1746162504047,
+            "name": "/home/matias/Documentos/dev/node/peliculas/backend-modular/logs/application-2025-05-02.log",
+            "hash": "605fdf6b06ee9e20d2d0c25fe8f03b07e1e344fdbf963e0cd562b714d2896b77"
+        },
+        {
+            "date": 1746269427594,
+            "name": "/home/matias/Documentos/dev/node/peliculas/backend-modular/logs/application-2025-05-03.log",
+            "hash": "72283273b574eed0ef6af97caaf063adcab85c5958e9b1e45aa5948161d2e62c"
+        },
+        {
+            "date": 1746370834471,
+            "name": "/home/matias/Documentos/dev/node/peliculas/backend-modular/logs/application-2025-05-04.log",
+            "hash": "57db0640495f0326ed858b30ccfe815943d8bb42b7d0764ab09b1e05333295c0"
+        }
+    ],
+    "hashType": "sha256"
+}

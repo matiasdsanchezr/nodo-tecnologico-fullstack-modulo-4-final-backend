@@ -1,0 +1,81 @@
+### Registrar un nuevo usuario
+POST http://localhost:5000/api/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "username": "matiasdsr",
+    "email": "matias@gmail.com",
+    "password": "123123_Ms"
+}
+
+
+### Iniciar sesión con credenciales de usuario
+POST http://localhost:5000/api/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "matias@gmail.com",
+    "password": "123123_Ms"
+}
+
+
+### Obtener informacion del usuario actual mediante cookies
+GET http://localhost:5000/api/auth/me HTTP/1.1
+
+
+### Cerrar sesión
+GET http://localhost:5000/api/auth/logout HTTP/1.1
+
+
+### Crear un nuevo perfil
+POST http://localhost:5000/api/profiles HTTP/1.1
+content-type: application/json
+
+{
+    "name": "HECTOR2",
+    "type": "kid"
+}
+
+
+### Obtener perfiles
+GET http://localhost:5000/api/profiles HTTP/1.1
+
+
+### Eliminar un perfil
+DELETE http://localhost:5000/api/profiles/6817a8f11e0af88a6097a53f HTTP/1.1
+Active-Profile-ID: 6817a8e71e0af88a6097a533
+
+
+### Obtener lista de peliculas
+GET http://localhost:5000/api/movies/?page=1 HTTP/1.1
+
+
+### Buscar pelicula usando filtros
+GET http://localhost:5000/api/movies/search?genre=28 HTTP/1.1
+
+
+### Obtener detalles de una pelicula mediante su id
+GET http://localhost:5000/api/movies/details/1233069 HTTP/1.1
+
+
+### Obtener watchlist
+GET http://localhost:5000/api/watchlist HTTP/1.1
+active-profile-id: 6817ad17a5858bfdf4d8344f
+
+### Añadir nuevo item a watchlist
+POST http://localhost:5000/api/watchlist HTTP/1.1
+content-type: application/json
+active-profile-id: 6817ad17a5858bfdf4d8344f
+
+{
+    "movie_id": "762509",
+    "title": "estoy cansado jefe",
+    "poster_path": "",
+    "vote_average": 1,
+    "watched": true
+}
+
+
+### Eliminar una pelicula de la watchlist
+DELETE http://localhost:5000/api/watchlist/1233069 HTTP/1.1
+active-profile-id: 6817ad17a5858bfdf4d8344f

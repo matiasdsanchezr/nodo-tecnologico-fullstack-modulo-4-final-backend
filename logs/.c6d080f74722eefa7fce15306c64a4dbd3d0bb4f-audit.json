@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "/home/matias/Documentos/dev/node/peliculas/backend/logs/.c6d080f74722eefa7fce15306c64a4dbd3d0bb4f-audit.json",
+    "files": [
+        {
+            "date": 1745969549031,
+            "name": "/home/matias/Documentos/dev/node/peliculas/backend/logs/application-2025-04-29.log",
+            "hash": "12fcc1eb83a5cd1b3e3af988809c5689fcca92b4c04ca02b6aacfebee6ca27ea"
+        }
+    ],
+    "hashType": "sha256"
+}

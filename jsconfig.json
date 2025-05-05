@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "ES2022",
+    "target": "es2022",
+    "moduleResolution": "node",
+    // "baseUrl": ".",
+    // "strict": true,
+    "esModuleInterop": true, // Importante para importar módulos CommonJS como ES Modules
+    "skipLibCheck": true, // Opcional: salta la verificación de tipos de archivos .d.ts de librerías (puede acelerar compilación)
+    "forceConsistentCasingInFileNames": true, // Fuerza que el casing de los nombres de archivo sea consistente
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "checkJs": true,
+    "allowJs": true
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["src/**/*"]
+}
