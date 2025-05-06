@@ -4,7 +4,6 @@ export const getConfig = () => {
   const nodeEnv = process.env.NODE_ENV || "development";
   const mongoDbUri = process.env.MONGO_URI;
   const tmdbToken = process.env.TMDB_TOKEN;
-  const appUrl = process.env.APP_URL;
   const allowedOrigin = process.env.ALLOWED_ORIGIN;
 
   if (!jwtSecret) {
@@ -16,9 +15,6 @@ export const getConfig = () => {
   if (!tmdbToken) {
     throw new Error("FATAL ERROR: tmdbToken environment variable is not set.");
   }
-  if (!appUrl) {
-    throw new Error("FATAL ERROR: appUrl environment variable is not set.");
-  }
   if (!allowedOrigin) {
     throw new Error("FATAL ERROR: appUrl environment variable is not set.");
   }
@@ -29,7 +25,6 @@ export const getConfig = () => {
     nodeEnv,
     mongoDbUri,
     tmdbToken,
-    appUrl,
-    allowedOrigin
+    allowedOrigin,
   };
 };
