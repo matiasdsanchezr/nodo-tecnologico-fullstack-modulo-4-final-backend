@@ -8,7 +8,7 @@ const watchlistItemSchema = new Schema(
       required: true,
       index: true,
     },
-    movie_id: { type: Number, required: true, unique: true },
+    movie_id: { type: Number, required: true },
     title: {
       type: String,
       required: true,

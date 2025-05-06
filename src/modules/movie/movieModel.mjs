@@ -68,26 +68,4 @@ movieSchema.virtual("formattedDuration").get(function () {
   return `${hours}h ${minutes}m`;
 });
 
-// Middleware de pre-save
-movieSchema.pre("save", function (next) {
-  console.log(`Guardando película: ${this.title}`);
-  next();
-});
-
-// Método estático
-/**
- * @this {Movie}
- * @param {string} genre
- */
-movieSchema.statics.findByGenre = function (genre) {
-  return this.find({ genre });
-};
-
-// Método de instancia
-movieSchema.methods.printInfo = function () {
-  console.log(
-    `${this.title} (${this.releaseYear}) - Dirigida por ${this.director}`
-  );
-};
-
 export const Movie = mongoose.model("Movie", movieSchema);

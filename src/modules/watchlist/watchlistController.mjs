@@ -9,7 +9,7 @@ import { watchlistService } from "./watchlistService.mjs";
  */
 export const getWatchlistItems = async (req, res, next) => {
   try {
-    const profileId = req.userContext.activeProfileId;
+    const profileId = req.profile.id;
     const watchlistItems = await watchlistService.getAll(profileId);
     res.json(watchlistItems);
   } catch (error) {
@@ -25,7 +25,7 @@ export const getWatchlistItems = async (req, res, next) => {
  */
 export const createWatchlistItem = async (req, res, next) => {
   try {
-    const profileId = req.userContext.activeProfileId;
+    const profileId = req.profile.id;
     const newItemData = req.body;
     const newItem = await watchlistService.addItemToWatchlist(
       profileId,
@@ -45,7 +45,7 @@ export const createWatchlistItem = async (req, res, next) => {
  */
 export const deleteWatchlistItem = async (req, res, next) => {
   try {
-    const profileId = req.userContext.activeProfileId;
+    const profileId = req.profile.id;
     const { id } = req.params;
     const deletedItem = await watchlistService.deleteWatchlistItem(
       profileId,

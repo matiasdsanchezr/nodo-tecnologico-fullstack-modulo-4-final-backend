@@ -1,9 +1,7 @@
-import dotenv from "dotenv";
+import "dotenv/config.js";
 import { connectDB } from "../config/database.mjs";
-import { Permission } from "../modules/permission/permissionModel.mjs";
+import { Permission } from "../modules/role/permissionModel.mjs";
 import { Role } from "../modules/role/roleModel.mjs";
-
-dotenv.config();
 
 const seedDataba = async () => {
   const permissions = await Permission.countDocuments();

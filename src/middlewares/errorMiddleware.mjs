@@ -3,19 +3,20 @@ import { CustomError } from "../utils/errors.mjs";
 
 // Manejador de errores principal
 const errorHandler = (err, req, res, next) => {
-  // Determinar el código de estado HTTP
   const statusCode = err.statusCode || 500;
 
   // Log del error si es un error inesperado
   if (statusCode === 500) {
-    logger.error(err.message, {
+    const details = {
       url: req.originalUrl,
       method: req.method,
       body: req.body,
       stack: err.stack,
       ip: req.ip,
-      user: req.user?.id, // Si tienes autenticación
-    });
+      user: req.user?.id,
+    };
+    logger.error(err.message, details);
+    console.error(err.message, details);
   }
 
   // Construir respuesta de error

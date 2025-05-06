@@ -1,11 +1,20 @@
 type UserContext = {
-  userId: string;
+  id: string;
   role?: string;
   activeProfileId?: string;
 };
 
+type ProfileContext = {
+  id: string;
+  name: string;
+  role: {
+    permissions: { name: string; description: string }[];
+  };
+};
+
 declare namespace Express {
   export interface Request {
-    userContext?: UserContext;
+    user?: UserContext;
+    profile?: ProfileContext;
   }
 }

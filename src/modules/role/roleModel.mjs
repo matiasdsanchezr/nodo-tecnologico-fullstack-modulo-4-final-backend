@@ -1,19 +1,5 @@
 import { Schema, model } from "mongoose";
-import { Permission } from "../permission/permissionModel.mjs";
-
-/**
- * @typedef {Object} Role
- * @property {string} name
- * @property {string} description
- * @property {import('mongoose').Types.ObjectId[]} permissions
- */
-
-/**
- * @typedef {Object} PopulatedRole
- * @property {string} name
- * @property {string} description
- * @property {import("../permission/permissionModel.mjs").Permission[]} permissions
- */
+import { Permission } from "./permissionModel.mjs";
 
 const roleSchema = new Schema(
   {

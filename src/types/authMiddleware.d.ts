@@ -6,7 +6,7 @@ declare type UserContext = {
   activeProfileId?: string;
 };
 
-export type AuthenticateTokenFunction = (
+export type AuthMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -14,4 +14,4 @@ export type AuthenticateTokenFunction = (
 
 export type HasPermissionFunction = (
   requiredPermission?: string
-) => (req: any, res: any, next: any) => Promise<void>;
+) => (req: Request, res: Response, next: NextFunction) => Promise<void>;

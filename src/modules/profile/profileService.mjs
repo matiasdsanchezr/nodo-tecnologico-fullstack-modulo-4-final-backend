@@ -1,7 +1,11 @@
 import { User } from "../user/userModel.mjs";
 import { Profile } from "./profileModel.mjs";
 import { Role } from "../role/roleModel.mjs";
-import { BadRequestError, NotFoundError } from "../../utils/errors.mjs";
+import {
+  BadRequestError,
+  CustomError,
+  NotFoundError,
+} from "../../utils/errors.mjs";
 import { watchlistService } from "../watchlist/watchlistService.mjs";
 
 class ProfileService {
@@ -10,7 +14,7 @@ class ProfileService {
     return Boolean(user);
   }
 
-  async getAll(userId) {
+  async getAllByUserId(userId) {
     const profiles = await Profile.find({ user: userId }).populate({
       path: "role",
       populate: {
@@ -19,6 +23,17 @@ class ProfileService {
       },
     });
     return profiles;
+  }
+
+  async getById(profileId) {
+    const profile = await Profile.findById(profileId).populate({
+      path: "role",
+      populate: {
+        path: "permissions",
+        model: "Permission",
+      },
+    });
+    return profile;
   }
 
   /**
@@ -114,6 +129,50 @@ class ProfileService {
     } catch (error) {
       throw error;
     }
+  }
+
+  async update(userId, profileId, profileData) {
+    const user = await User.findById(userId).populate("profiles");
+
+    if (
+      user.profiles.some(
+        (profile) =>
+          // @ts-ignore
+          profile.name === profileData.name && profile._id != profileId
+      )
+    ) {
+      throw new BadRequestError("Nombre de perfil ya registrado");
+    }
+
+    const profile = await Profile.findById(profileId).populate({
+      path: "role",
+      populate: {
+        path: "permissions",
+        model: "Permission",
+      },
+    });
+    if (
+      // @ts-ignore
+      profile.role.name === "owner" &&
+      // @ts-ignore
+      profileData.type != profile.role.name
+    ) {
+      profileData.type = "owner";
+    }
+
+    const roleType = profileData.type;
+    const role = await Role.findOne({ name: roleType });
+    if (!role) throw new CustomError(`No se encontro el rol ${roleType}`, 500);
+
+    profile.name = profileData.name;
+    profile.role = role.id;
+    await profile.save();
+
+    // const profile = await Profile.findByIdAndUpdate(profileId, {
+    //   name: profileData.name,
+    //   role,
+    // });
+    return profile;
   }
 }
 

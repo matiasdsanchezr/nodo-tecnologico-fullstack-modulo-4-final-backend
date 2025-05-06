@@ -1,7 +1,25 @@
-import { BadRequestError } from "../../utils/errors.mjs";
-import { AuthService } from "./authService.mjs";
+import { getConfig } from "../../config/index.mjs";
+import { authService } from "./authService.mjs";
 
-const authService = new AuthService();
+const config = getConfig();
+
+/**
+ * Configuracion de cookies
+ * @param {number} maxAgeMs
+ * @returns {import("express").CookieOptions}
+ */
+export const getSecureCookieOptions = (maxAgeMs = 1000 * 60 * 60 * 24) => {
+  const isProduction = config.nodeEnv === "production";
+
+  return {
+    maxAge: maxAgeMs,
+    httpOnly: true, // Prevent client-side JavaScript access
+    secure: isProduction, // Only send cookie over HTTPS
+    // sameSite: "lax", // Mitigate CSRF attacks
+    // path: "/", // Cookie accessible from all paths
+    // domain: ".yourdomain.com", // Optional: specify domain (e.g., for subdomains)
+  };
+};
 
 /**
  * Sign up new user
@@ -13,7 +31,10 @@ export const signup = async (req, res, next) => {
   try {
     const user = await authService.register(req.body);
     const token = authService.generateToken(user);
-    res.status(201).cookie("authToken", token, cookieOptions).json(user);
+    res
+      .status(201)
+      .cookie("authToken", token, getSecureCookieOptions())
+      .json(user);
   } catch (error) {
     next(error);
   }
@@ -30,7 +51,7 @@ export const signin = async (req, res, next) => {
     const { email, password } = req.body;
     const user = await authService.login(email, password);
     const token = authService.generateToken(user);
-    res.cookie("authToken", token, cookieOptions).json(user);
+    res.cookie("authToken", token, getSecureCookieOptions()).json(user);
   } catch (error) {
     next(error);
   }
@@ -44,17 +65,7 @@ export const signin = async (req, res, next) => {
  */
 export const logout = async (req, res, next) => {
   try {
-    const { userId } = req.userContext;
-
-    if (!authService.checkUserExists(userId)) {
-      res
-        .status(400)
-        .cookie("authToken", "", cookieOptions)
-        .json({ error: "Usuario no registrado" });
-      return;
-    }
-
-    res.cookie("authToken", "", cookieOptions).send();
+    res.cookie("authToken", "", getSecureCookieOptions()).send();
   } catch (error) {
     next(error);
   }
@@ -68,12 +79,12 @@ export const logout = async (req, res, next) => {
  */
 export const getUserFromToken = async (req, res, next) => {
   try {
-    const userId = req.userContext.userId;
+    const userId = req.user.id;
     const user = await authService.getUser(userId);
     if (!user) {
       res
         .status(400)
-        .cookie("authToken", "", cookieOptions)
+        .cookie("authToken", "", getSecureCookieOptions())
         .json({ error: "Usuario no registrado" });
       return;
     }
@@ -83,16 +94,4 @@ export const getUserFromToken = async (req, res, next) => {
     console.error("Error en getUserFromToken:", error);
     res.status(500).json({ error: "Error al cargar los datos del usuario" });
   }
-};
-
-/** @type {import("express").CookieOptions} */
-const cookieOptions = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
-  maxAge: 1000 * 60 * 60 * 24, // Un dia
-  domain:
-    process.env.NODE_ENV === "production"
-      ? process.env.PRODUCTION_URL
-      : process.env.FRONTEND_URL,
 };

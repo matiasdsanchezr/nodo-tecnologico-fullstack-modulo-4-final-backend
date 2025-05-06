@@ -3,8 +3,8 @@ POST http://localhost:5000/api/auth/register HTTP/1.1
 content-type: application/json
 
 {
-    "username": "matiasdsr",
-    "email": "matias@gmail.com",
+    "username": "matias",
+    "email": "matiasdsr@gmail.com",
     "password": "123123_Ms"
 }
 
@@ -14,7 +14,7 @@ POST http://localhost:5000/api/auth/login HTTP/1.1
 content-type: application/json
 
 {
-    "email": "matias@gmail.com",
+    "email": "matiasdsr@gmail.com",
     "password": "123123_Ms"
 }
 
@@ -27,23 +27,33 @@ GET http://localhost:5000/api/auth/me HTTP/1.1
 GET http://localhost:5000/api/auth/logout HTTP/1.1
 
 
+### Obtener perfiles
+GET http://localhost:5000/api/profiles HTTP/1.1
+
+
 ### Crear un nuevo perfil
 POST http://localhost:5000/api/profiles HTTP/1.1
 content-type: application/json
 
 {
-    "name": "HECTOR2",
+    "name": "HECTOR3",
     "type": "kid"
 }
 
 
-### Obtener perfiles
-GET http://localhost:5000/api/profiles HTTP/1.1
+### Editar perfil
+PUT http://localhost:5000/api/profiles/6819b5a06a47cdeebaf9130c HTTP/1.1
+Active-Profile-ID: 68198bf97f30b3cc3b9625b5
+content-type: application/json
 
+{
+    "name": "matias jr",
+    "type": "kid"
+}
 
 ### Eliminar un perfil
-DELETE http://localhost:5000/api/profiles/6817a8f11e0af88a6097a53f HTTP/1.1
-Active-Profile-ID: 6817a8e71e0af88a6097a533
+DELETE http://localhost:5000/api/profiles/6819b4136a47cdeebaf912de HTTP/1.1
+Active-Profile-ID: 68198bf97f30b3cc3b9625b5
 
 
 ### Obtener lista de peliculas
@@ -60,22 +70,23 @@ GET http://localhost:5000/api/movies/details/1233069 HTTP/1.1
 
 ### Obtener watchlist
 GET http://localhost:5000/api/watchlist HTTP/1.1
-active-profile-id: 6817ad17a5858bfdf4d8344f
+active-profile-id: 68191c2ab27bb1a3389a7b5e
 
 ### Añadir nuevo item a watchlist
 POST http://localhost:5000/api/watchlist HTTP/1.1
 content-type: application/json
-active-profile-id: 6817ad17a5858bfdf4d8344f
+active-profile-id: 68191c2ab27bb1a3389a7b5e
 
 {
     "movie_id": "762509",
     "title": "estoy cansado jefe",
     "poster_path": "",
     "vote_average": 1,
-    "watched": true
+    "watched": true,
+    "release_date": "asdasd"
 }
 
 
 ### Eliminar una pelicula de la watchlist
 DELETE http://localhost:5000/api/watchlist/1233069 HTTP/1.1
-active-profile-id: 6817ad17a5858bfdf4d8344f
+active-profile-id: 68191c2ab27bb1a3389a7b5e

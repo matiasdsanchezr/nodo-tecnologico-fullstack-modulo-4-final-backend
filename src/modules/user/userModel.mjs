@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 import { Profile } from "../profile/profileModel.mjs";
-import { Role } from "../role/roleModel.mjs";
 
 /**
  * @typedef {Object} User
@@ -58,23 +57,6 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
-
-// Al crear un usuario, crear automáticamente su owner profile
-// userSchema.pre("save", async function (next) {
-//   console.log(this);
-//   if (this.isNew && this.profiles.length < 1) {
-//     const role = await Role.findOne({ name: "owner" });
-//     const ownerProfile = new Profile({
-//       user: this._id,
-//       name: this.username,
-//       role: role._id,
-//     });
-
-//     await ownerProfile.save();
-//     this.profiles = ownerProfile._id;
-//   }
-//   next();
-// });
 
 // Borrar los perfiles asociados a usuario
 userSchema.pre(

@@ -1,6 +1,6 @@
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import dotenv from "dotenv";
+import "dotenv/config.js";
 import express from "express";
 import { connectDB } from "./config/database.mjs";
 import {
@@ -11,8 +11,9 @@ import { authRoutes } from "./modules/auth/authRoutes.mjs";
 import { movieRoutes } from "./modules/movie/movieRoutes.mjs";
 import { profileRoutes } from "./modules/profile/profileRoutes.mjs";
 import { watchlistRoutes } from "./modules/watchlist/watchlistRoutes.mjs";
+import { getConfig } from "./config/index.mjs";
 
-dotenv.config();
+const config = getConfig();
 
 // Conectar a MongoDB
 connectDB();
@@ -22,10 +23,7 @@ const app = express();
 // Middlewares
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? process.env.PRODUCTION_URL
-        : process.env.FRONTEND_URL,
+    origin: "*",
     credentials: true,
   })
 );

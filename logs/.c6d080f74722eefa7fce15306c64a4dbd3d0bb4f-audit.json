@@ -6,9 +6,9 @@
     "auditLog": "/home/matias/Documentos/dev/node/peliculas/backend/logs/.c6d080f74722eefa7fce15306c64a4dbd3d0bb4f-audit.json",
     "files": [
         {
-            "date": 1745969549031,
-            "name": "/home/matias/Documentos/dev/node/peliculas/backend/logs/application-2025-04-29.log",
-            "hash": "12fcc1eb83a5cd1b3e3af988809c5689fcca92b4c04ca02b6aacfebee6ca27ea"
+            "date": 1746501674905,
+            "name": "/home/matias/Documentos/dev/node/peliculas/backend/logs/application-2025-05-06.log",
+            "hash": "6529f0fc66b0f581cbfb0850ed33426946e531305ea0e7050276050068352ae2"
         }
     ],
     "hashType": "sha256"

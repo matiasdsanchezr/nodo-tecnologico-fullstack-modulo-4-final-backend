@@ -11,8 +11,9 @@ import { model, Schema } from "mongoose";
  * @typedef {Object} PopulatedProfile
  * @property {import("../user/userModel.mjs").User} user
  * @property {string} name
- * @property {import("../role/roleModel.mjs").PopulatedRole} role
+ * @property {import("../../types/role").PopulatedRole} role
  */
+
 const profileSchema = new Schema(
   {
     user: {
@@ -46,7 +47,7 @@ const profileSchema = new Schema(
 );
 
 // Índice compuesto para asegurar que un usuario no tenga perfiles con el mismo nombre
-profileSchema.index({ user: 1, name: 1 }, { unique: true });
+// profileSchema.index({ user: 1, name: 1 }, { unique: true });
 
 // Middleware que solo haya un perfil owner por usuario
 // profileSchema.pre("save", async function (next) {
@@ -63,6 +64,5 @@ profileSchema.index({ user: 1, name: 1 }, { unique: true });
 //   }
 //   next();
 // });
-
 
 export const Profile = model("Profile", profileSchema);

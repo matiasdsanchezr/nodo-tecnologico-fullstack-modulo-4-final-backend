@@ -2,14 +2,18 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { User } from "../user/userModel.mjs";
 import {
-  BadRequestError,
   ConflictError,
+  ForbiddenError,
   UnauthorizedError,
 } from "../../utils/errors.mjs";
 import { profileService } from "../profile/profileService.mjs";
+import { getConfig } from "../../config/index.mjs";
+import { Profile } from "../profile/profileModel.mjs";
 import mongoose from "mongoose";
 
-export class AuthService {
+const config = getConfig();
+
+class AuthService {
   async checkUserExists(userId) {
     const user = await User.findById(userId);
     return !!user;
@@ -66,8 +70,65 @@ export class AuthService {
     return user.toJSON();
   }
 
+  /**
+   * Verificar y decodificar un token de autenticación
+   * @param {string} token
+   * @returns {{id:string} | undefined}
+   */
+  decodeToken(token) {
+    try {
+      const decodedToken = jwt.verify(token, config.jwtSecret);
+      if (typeof decodedToken === "string") {
+        throw new Error("El token debe contener un objeto usuario");
+      }
+      // @ts-ignore
+      return decodedToken;
+    } catch (error) {
+      return undefined;
+    }
+  }
+
+  /**
+   * Verificar y decodificar un token de autenticación
+   * @param {string} userId
+   * @param {string} profileId
+   * @param {string} requiredPermission
+   * @returns *
+   */
+  async verifyProfilePermissions(userId, profileId, requiredPermission) {
+    const profile = await Profile.findById(profileId).populate({
+      path: "role",
+      populate: {
+        path: "permissions",
+        model: "Permission",
+      },
+    });
+
+    const userObjectId = new mongoose.Types.ObjectId(userId);
+    if (profile.user != userObjectId) {
+      throw new UnauthorizedError(
+        "Se requiere un header active-profile-id valido."
+      );
+    }
+
+    if (requiredPermission) {
+      // @ts-ignore
+      const hasPermission = profile.role.permissions.some(
+        (permission) => permission.name === requiredPermission
+      );
+
+      if (!hasPermission) {
+        throw new ForbiddenError(
+          "El perfil en uso no tiene permisos para realizar esta acción."
+        );
+      }
+    }
+  }
+
   // Método auxiliar para generar tokens JWT
   generateToken(user) {
     return jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "24h" });
   }
 }
+
+export const authService = new AuthService();

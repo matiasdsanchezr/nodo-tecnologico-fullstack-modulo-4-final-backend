@@ -2,6 +2,11 @@ import axios from "axios";
 import { Movie } from "./movieModel.mjs";
 
 class MovieService {
+  /**
+   * Obtener peliculas paginadas (10 peliculas por pagina).
+   * @param {number} page
+   * @returns
+   */
   async getAll(page = 1) {
     const movies = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=es-ES&page=${page}&sort_by=popularity.desc`,
@@ -16,7 +21,7 @@ class MovieService {
   }
 
   /**
-   *
+   * Obtener detalles de una película mediante su id
    * @param {number} movieId
    * @returns
    */
@@ -44,31 +49,11 @@ class MovieService {
     return { ...responses[0].data, videos: responses[1].data?.results ?? [] };
   }
 
-  async create(movieData) {
-    const movie = new Movie(movieData);
-    await movie.save();
-    movie.id = movie._id;
-    return movie;
-  }
-
-  async update(id, movieData) {
-    const movie = await Movie.findByIdAndUpdate(id, movieData, {
-      new: true,
-    });
-    if (!movie) {
-      throw new Error("Superhéroe no encontrado");
-    }
-    return movie;
-  }
-
-  async delete(id) {
-    const movie = await Movie.findByIdAndDelete(id);
-    if (!movie) {
-      throw new Error("Superhéroe no encontrado");
-    }
-    return movie;
-  }
-
+  /**
+   * Obtener una lista de peliculas filtradas y organizadas por página
+   * @param {*} param0
+   * @returns
+   */
   async search({
     page,
     adult,
