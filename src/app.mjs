@@ -25,8 +25,8 @@ app.use(
   cors({
     origin: config.allowedOrigin,
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'active-profile-id'],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization", "active-profile-id"],
   })
 );
 app.use(cookieParser("TU_SECRETO_ESTABLE"));
@@ -46,3 +46,5 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
+
+export default app;

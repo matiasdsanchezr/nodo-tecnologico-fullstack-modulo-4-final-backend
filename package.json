@@ -9,8 +9,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "node --watch ./src/app.mjs",
+    "build": "echo \"No build step needed\"",
     "start": "node ./src/app.mjs",
-    "seedDb": "node ./src/scripts/seedDb.mjs"
+    "seedDb": "node ./src/scripts/seedDb.mjs",
+    "deploy": "vercel --prod"
   },
   "dependencies": {
     "@types/mongoose": "^5.11.96",

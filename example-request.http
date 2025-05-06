@@ -1,5 +1,5 @@
 ### Registrar un nuevo usuario
-POST http://localhost:5000/api/auth/register HTTP/1.1
+POST http://localhost:3000/api/auth/register HTTP/1.1
 content-type: application/json
 
 {
@@ -10,7 +10,7 @@ content-type: application/json
 
 
 ### Iniciar sesión con credenciales de usuario
-POST http://localhost:5000/api/auth/login HTTP/1.1
+POST http://localhost:3000/api/api/auth/login HTTP/1.1
 content-type: application/json
 
 {
