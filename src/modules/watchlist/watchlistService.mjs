@@ -107,6 +107,14 @@ class WatchlistService {
     return watchlist;
   }
 
+  async deleteByProfileId(profileId) {
+    const watchlist = await Watchlist.findOneAndDelete({ profile: profileId });
+    if (!watchlist) {
+      throw new Error("Watchlist no encontrada");
+    }
+    return watchlist;
+  }
+
   async deleteWatchlistItem(profileId, movie_id) {
     try {
       const updateResult = await Watchlist.findOneAndUpdate(

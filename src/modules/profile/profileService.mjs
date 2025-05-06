@@ -7,6 +7,7 @@ import {
   NotFoundError,
 } from "../../utils/errors.mjs";
 import { watchlistService } from "../watchlist/watchlistService.mjs";
+import { Watchlist } from "../watchlist/watchlistModel.mjs";
 
 class ProfileService {
   async checkEmailExists(email) {
@@ -125,6 +126,7 @@ class ProfileService {
 
     try {
       await user.save();
+      await watchlistService.deleteByProfileId(profileId);
       await Profile.deleteOne({ _id: profileId });
     } catch (error) {
       throw error;
