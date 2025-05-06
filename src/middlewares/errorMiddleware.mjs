@@ -1,4 +1,3 @@
-import { logger } from "../utils/logger.mjs";
 import { CustomError } from "../utils/errors.mjs";
 
 // Manejador de errores principal
@@ -15,7 +14,6 @@ const errorHandler = (err, req, res, next) => {
       ip: req.ip,
       user: req.user?.id,
     };
-    logger.error(err.message, details);
     console.error(err.message, details);
   }
 
