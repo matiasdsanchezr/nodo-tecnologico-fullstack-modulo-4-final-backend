@@ -46,7 +46,7 @@ const profileSchema = new Schema(
   }
 );
 
-profileSchema.index({ userId: 1, name: 1 }, { unique: true });
+profileSchema.index({ user: 1, name: 1 }, { unique: true });
 
 // Índice compuesto para asegurar que un usuario no tenga perfiles con el mismo nombre
 // profileSchema.index({ user: 1, name: 1 }, { unique: true });
