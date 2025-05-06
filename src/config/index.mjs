@@ -5,7 +5,7 @@ export const getConfig = () => {
   const mongoDbUri = process.env.MONGO_URI;
   const tmdbToken = process.env.TMDB_TOKEN;
   const appUrl = process.env.APP_URL;
-  const clientDomain = process.env.CLIENT_DOMAIN;
+  const allowedOrigin = process.env.ALLOWED_ORIGIN;
 
   if (!jwtSecret) {
     throw new Error("FATAL ERROR: JWT_SECRET environment variable is not set.");
@@ -19,7 +19,7 @@ export const getConfig = () => {
   if (!appUrl) {
     throw new Error("FATAL ERROR: appUrl environment variable is not set.");
   }
-  if (!clientDomain) {
+  if (!allowedOrigin) {
     throw new Error("FATAL ERROR: appUrl environment variable is not set.");
   }
 
@@ -30,6 +30,6 @@ export const getConfig = () => {
     mongoDbUri,
     tmdbToken,
     appUrl,
-    clientDomain,
+    allowedOrigin
   };
 };
