@@ -10,7 +10,7 @@ content-type: application/json
 
 
 ### Iniciar sesión con credenciales de usuario
-POST http://localhost:3000/api/api/auth/login HTTP/1.1
+POST http://localhost:3000/api/auth/login HTTP/1.1
 content-type: application/json
 
 {
@@ -20,19 +20,19 @@ content-type: application/json
 
 
 ### Obtener informacion del usuario actual mediante cookies
-GET http://localhost:5000/api/auth/me HTTP/1.1
+GET http://localhost:3000/api/auth/me HTTP/1.1
 
 
 ### Cerrar sesión
-GET http://localhost:5000/api/auth/logout HTTP/1.1
+GET http://localhost:3000/api/auth/logout HTTP/1.1
 
 
 ### Obtener perfiles
-GET http://localhost:5000/api/profiles HTTP/1.1
+GET http://localhost:3000/api/profiles HTTP/1.1
 
 
 ### Crear un nuevo perfil
-POST http://localhost:5000/api/profiles HTTP/1.1
+POST http://localhost:3000/api/profiles HTTP/1.1
 content-type: application/json
 
 {
@@ -42,7 +42,7 @@ content-type: application/json
 
 
 ### Editar perfil
-PUT http://localhost:5000/api/profiles/6819b5a06a47cdeebaf9130c HTTP/1.1
+PUT http://localhost:3000/api/profiles/6819b5a06a47cdeebaf9130c HTTP/1.1
 Active-Profile-ID: 68198bf97f30b3cc3b9625b5
 content-type: application/json
 
@@ -52,28 +52,28 @@ content-type: application/json
 }
 
 ### Eliminar un perfil
-DELETE http://localhost:5000/api/profiles/6819b4136a47cdeebaf912de HTTP/1.1
+DELETE http://localhost:3000/api/profiles/6819b4136a47cdeebaf912de HTTP/1.1
 Active-Profile-ID: 68198bf97f30b3cc3b9625b5
 
 
 ### Obtener lista de peliculas
-GET http://localhost:5000/api/movies/?page=1 HTTP/1.1
+GET http://localhost:3000/api/movies/?page=1 HTTP/1.1
 
 
 ### Buscar pelicula usando filtros
-GET http://localhost:5000/api/movies/search?genre=28 HTTP/1.1
+GET http://localhost:3000/api/movies/search?genre=28 HTTP/1.1
 
 
 ### Obtener detalles de una pelicula mediante su id
-GET http://localhost:5000/api/movies/details/1233069 HTTP/1.1
+GET http://localhost:3000/api/movies/details/1233069 HTTP/1.1
 
 
 ### Obtener watchlist
-GET http://localhost:5000/api/watchlist HTTP/1.1
+GET http://localhost:3000/api/watchlist HTTP/1.1
 active-profile-id: 68191c2ab27bb1a3389a7b5e
 
 ### Añadir nuevo item a watchlist
-POST http://localhost:5000/api/watchlist HTTP/1.1
+POST http://localhost:3000/api/watchlist HTTP/1.1
 content-type: application/json
 active-profile-id: 68191c2ab27bb1a3389a7b5e
 
@@ -88,5 +88,5 @@ active-profile-id: 68191c2ab27bb1a3389a7b5e
 
 
 ### Eliminar una pelicula de la watchlist
-DELETE http://localhost:5000/api/watchlist/1233069 HTTP/1.1
+DELETE http://localhost:3000/api/watchlist/1233069 HTTP/1.1
 active-profile-id: 68191c2ab27bb1a3389a7b5e

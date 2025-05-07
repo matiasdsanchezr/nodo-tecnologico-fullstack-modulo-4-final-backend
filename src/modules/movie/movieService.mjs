@@ -56,12 +56,14 @@ class MovieService {
    */
   async search({
     page,
-    adult,
+    includeAdult,
     genre,
     primary_release_year,
     vote_average_gte,
     vote_average_lte,
+    sort_by,
   }) {
+    console.log(includeAdult);
     const movies = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?language=es-AR`,
       {
@@ -70,9 +72,9 @@ class MovieService {
           Accept: "application/json",
         },
         params: {
-          include_adult: adult,
+          includeAdult,
           page: page,
-          sort_by: "popularity.desc",
+          sort_by,
           with_genres: genre,
           primary_release_year,
           "vote_average.gte": vote_average_gte,

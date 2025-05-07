@@ -7,12 +7,14 @@ const usernameValidation = body("username")
   .isEmpty()
   .withMessage("Se requiere un nombre de usuario")
   .isString()
-  .withMessage("El nombre de usuario debe ser un string");
+  .withMessage("El nombre de usuario debe ser un string")
+  .toLowerCase();
 
 const emailValidation = body("email")
   .trim()
   .isEmail()
-  .withMessage("Se requiere un email valido");
+  .withMessage("Se requiere un email valido")
+  .toLowerCase();
 
 const passwordValidation = body("password")
   .trim()
