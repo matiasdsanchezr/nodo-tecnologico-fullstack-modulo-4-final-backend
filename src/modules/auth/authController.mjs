@@ -15,8 +15,8 @@ export const getSecureCookieOptions = (maxAgeMs = 1000 * 60 * 60 * 24) => {
     maxAge: maxAgeMs,
     httpOnly: true, // Prevent client-side JavaScript access
     secure: isProduction, // Only send cookie over HTTPS
-    // sameSite: "lax", // Mitigate CSRF attacks
-    // path: "/", // Cookie accessible from all paths
+    sameSite: "none", // Mitigate CSRF attacks
+    path: "/", // Cookie accessible from all paths
     // domain: ".yourdomain.com", // Optional: specify domain (e.g., for subdomains)
   };
 };

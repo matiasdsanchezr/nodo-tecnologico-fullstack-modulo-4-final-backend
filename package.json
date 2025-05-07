@@ -11,8 +11,8 @@
     "dev": "node --watch ./src/app.mjs",
     "build": "echo \"No build step needed\"",
     "start": "node ./src/app.mjs",
-    "seedDb": "node ./src/scripts/seedDb.mjs",
-    "deploy": "vercel --prod"
+    "deploy": "vercel --prod",
+    "populateDb": "node ./src/scripts/populateDb.mjs"
   },
   "dependencies": {
     "@types/mongoose": "^5.11.96",
