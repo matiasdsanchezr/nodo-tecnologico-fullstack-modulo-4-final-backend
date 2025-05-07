@@ -63,7 +63,6 @@ class MovieService {
     vote_average_lte,
     sort_by,
   }) {
-    console.log(includeAdult);
     const movies = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?language=es-AR`,
       {
